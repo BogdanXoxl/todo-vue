@@ -1,6 +1,6 @@
 <template>
-  <li class="flex items-center justify-between py-2 pl-2 border-b-2">
-    <div :class="completed && 'line-through'">
+  <li class="flex items-start justify-between py-2 pl-2 border-b-2 max-w-lg w-full">
+    <div :class="['break-words w-[calc(100%-100px)]', completed && 'line-through']">
       <slot></slot>
     </div>
     <div class="flex gap-2">
