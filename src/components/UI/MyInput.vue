@@ -4,8 +4,8 @@
     :value="modelValue"
     @input="$emit('update:modelValue', $event.target.value)"
     :class="[
-      'w-full border-2 border-solid border-primary rounded-md outline-0 px-2 focus:border-secondary',
-      error && 'border-danger shake'
+      'w-full border-2 border-solid  rounded-md outline-0 px-2 ',
+      (error && 'border-danger shake') || 'border-primary focus:border-secondary'
     ]"
   />
 </template>
