@@ -41,7 +41,7 @@ export default {
 <style scoped>
 .list-move,
 .list-enter-active {
-  transition: all 0.5s ease-in;
+  transition: all 0.3s ease-in;
 }
 
 .list-enter-from,
@@ -51,7 +51,7 @@ export default {
 }
 
 .list-leave-active {
-  transition: all 0.5s ease-in;
+  transition: all 0.3s ease-in;
 }
 
 .mylist-enter-active,

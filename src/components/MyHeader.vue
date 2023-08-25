@@ -2,7 +2,7 @@
   <header class="flex flex-col gap-3">
     <h1 class="text-4xl">{{ title }}</h1>
     <div class="flex justify-between gap-3">
-      <my-input v-model.trim="inputValue" @keyup.enter="add" autofocus />
+      <my-input v-model.trim="inputValue" @keyup.enter="add" autofocus :error="error" />
       <my-button primary @click="add">Add +</my-button>
     </div>
   </header>
@@ -20,7 +20,8 @@ export default {
     title: {
       type: String,
       required: true
-    }
+    },
+    error: Boolean
   },
   methods: {
     add() {

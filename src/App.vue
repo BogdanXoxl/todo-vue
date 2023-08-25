@@ -1,6 +1,7 @@
 <template>
   <div class="max-w-lg mx-auto px-3 pt-7 text-secondary bg-primary-white">
-    <my-header title="Todo App" class="mb-5" @add="addTodo" />
+    <my-header title="Todo App" class="mb-5" @add="addTodo" :error="showError" />
+    <toast-alert title="Todo cannot be empty!" :showError="showError" />
     <my-list
       class="todo"
       :items="todos.filter((todo) => !todo.completed)"
@@ -20,19 +21,22 @@
 <script>
 import MyHeader from "./components/MyHeader.vue";
 import MyList from "./components/MyList/MyList.vue";
+import ToastAlert from "./components/ToastAlert.vue";
 
 export default {
   components: {
     MyHeader,
-    MyList
+    MyList,
+    ToastAlert
   },
   data() {
     return {
       counter: 0,
+      showError: false,
       todos: [
         { id: 1, title: "Add animation", completed: true },
         { id: 2, title: "Fix styles when text too big", completed: true },
-        { id: 3, title: "Add toast alert", completed: false },
+        { id: 3, title: "Add toast alert", completed: true },
         { id: 4, title: "Pop up on delete", completed: false },
         { id: 5, title: "Add download", completed: false },
         { id: 6, title: "Add upload", completed: false },
@@ -50,6 +54,12 @@ export default {
           title,
           completed: false
         });
+      else {
+        this.showError = true;
+        setTimeout(() => {
+          this.showError = false;
+        }, 3000);
+      }
     },
     removeTodo(id) {
       this.todos = this.todos.filter((todo) => todo.id !== id);
