@@ -1,4 +1,4 @@
-# [Todo App](https://todo-vue-bogdanxoxl.vercel.app/) with Vue.js 3.0
+# [ToDo App](https://todo-vue-bogdanxoxl.vercel.app/) with Vue.js 3.0
 
 <img src="https://github.com/BogdanXoxl/todo-vue/blob/main/public/vue-todo.gif">
 
