@@ -1,6 +1,13 @@
 <template>
   <div class="max-w-lg mx-auto px-3 pt-7 text-secondary bg-primary-white">
-    <my-header title="Todo App" class="mb-5" @add="addTodo" :error="showError" />
+    <my-header
+      title="Todo App"
+      class="mb-5"
+      :error="showError"
+      @add="addTodo"
+      @download="onDownload"
+      @upload="onUpload"
+    />
     <toast-alert title="Todo cannot be empty!" :showError="showError" />
     <my-list
       class="todo"
@@ -25,6 +32,7 @@
 import MyHeader from "./components/MyHeader.vue";
 import MyList from "./components/MyList/MyList.vue";
 import ToastAlert from "./components/ToastAlert.vue";
+import { download, upload, parseArrayFromJson } from "./utils";
 
 export default {
   components: {
@@ -98,6 +106,17 @@ export default {
 
       this.todos = this.todos.filter((todo) => todo.id !== id);
       this.todos.push(newTodo);
+    },
+
+    onDownload() {
+      download("todos.json", JSON.stringify(this.todos));
+    },
+
+    async onUpload() {
+      const fileTodos = await upload().then((txt) => parseArrayFromJson(txt));
+      this.todos = Array.from(
+        [...fileTodos, ...this.todos].reduce((m, o) => m.set(o.id, o), new Map()).values()
+      );
     }
   }
 };

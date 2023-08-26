@@ -38,7 +38,7 @@ yarn lint
 <p>Implement local storage support to persist user tasks even after closing the browser. This feature ensures that users don't lose their task data between sessions. By utilizing the browser's localStorage API, the app will store and retrieve task data locally. This addition enhances user experience and convenience.</p>
 <br/>
 
-- [ ] **2. Upload/Download Functionality:**
+- [*] **2. Upload/Download Functionality:**
 <p>Integrate the ability to upload and download task lists as files. Users can export their tasks as a file and import them back into the app. This feature offers users a way to back up their tasks externally or transfer them between devices easily. It enhances the app's versatility and makes task management even more user-friendly.</p>
 <br/>
 
