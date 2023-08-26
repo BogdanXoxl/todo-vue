@@ -15,6 +15,9 @@
       :items="todos.filter((todo) => todo.completed)"
       @removeItem="removeTodo"
     />
+    <teleport to="#modal">
+      <my-popup ref="popup" />
+    </teleport>
   </div>
 </template>
 
@@ -37,12 +40,10 @@ export default {
         { id: 1, title: "Add animation", completed: true },
         { id: 2, title: "Fix styles when text too big", completed: true },
         { id: 3, title: "Add toast alert", completed: true },
-        { id: 4, title: "Pop up on delete", completed: false },
+        { id: 4, title: "Pop up on delete", completed: true },
         { id: 5, title: "Add download", completed: false },
         { id: 6, title: "Add upload", completed: false },
-        { id: 7, title: "Add pinia", completed: false },
-        { id: 8, title: "Add save to localstorage", completed: false },
-        { id: 9, title: "Add typescript", completed: false }
+        { id: 7, title: "Add save to localstorage", completed: false }
       ]
     };
   },
@@ -61,8 +62,25 @@ export default {
         }, 3000);
       }
     },
-    removeTodo(id) {
-      this.todos = this.todos.filter((todo) => todo.id !== id);
+    async removeTodo(id) {
+      const itemIndex = this.todos.findIndex((todo) => todo.id === id);
+      if (itemIndex === -1) return;
+
+      const result = await this.$refs.popup.open({
+        title: "Do you really wanna delete this todo?",
+        text: this.todos[itemIndex].title,
+        subtext: new Date(this.todos[itemIndex].id).toLocaleString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "numeric",
+          minute: "numeric"
+        })
+      });
+
+      if (result) {
+        this.todos.splice(itemIndex, 1);
+      }
     },
     completeTodo(id) {
       // this.todos = this.todos.map((todo) => {
