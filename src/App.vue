@@ -49,9 +49,11 @@ export default {
         { id: 2, title: "Fix styles when text too big", completed: true },
         { id: 3, title: "Add toast alert", completed: true },
         { id: 4, title: "Pop up on delete", completed: true },
-        { id: 5, title: "Add download", completed: false },
-        { id: 6, title: "Add upload", completed: false },
-        { id: 7, title: "Add save to localstorage", completed: false }
+        { id: 5, title: "Add download", completed: true },
+        { id: 6, title: "Add upload", completed: true },
+        { id: 7, title: "Add save to localstorage", completed: false },
+        { id: 8, title: "Add state manager", completed: false },
+        { id: 9, title: "Add typescript", completed: false }
       ]
     };
   },
