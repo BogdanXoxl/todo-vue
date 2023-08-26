@@ -5,12 +5,14 @@
       <div class="flex">
         <my-button
           type="file"
+          title="Upload"
           @click="$emit('upload')"
           class="rounded-l-md rounded-r-none border border-primary"
         >
           <icon-upload class="w-6 h-6" />
         </my-button>
         <my-button
+          title="Download"
           @click="$emit('download')"
           class="rounded-r-md rounded-l-none border-r border-y border-primary"
         >
