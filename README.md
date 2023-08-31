@@ -34,7 +34,7 @@ yarn lint
 
 ## TODO//::
 
-- [ ] **1. LocalStorage Support:**
+- [x] ~~**1. LocalStorage Support:**~~
 <p>Implement local storage support to persist user tasks even after closing the browser. This feature ensures that users don't lose their task data between sessions. By utilizing the browser's localStorage API, the app will store and retrieve task data locally. This addition enhances user experience and convenience.</p>
 <br/>
 
@@ -50,7 +50,15 @@ yarn lint
 <p>Integrate a state management solution, such as Vuex, to efficiently manage the app's global state. As the app grows in complexity, managing state across various components can become challenging. A state manager centralizes the data, making it easier to share and modify across different parts of the app. This improves code organization and reduces the risk of state-related bugs.</p>
 <br/>
 
-- [ ] **5. Accessibility (a11y) Enhancement:**
+- [ ] **5. Composition API:**
+<p>Transitioning my existing options-style todo app to the Composition API isn't just an upgrade—it's a deliberate step to deepen my Vue.js understanding. Embracing the Composition API means rethinking how I structure code, moving from options to composition functions for more intuitive logic organization. This transition sharpens my grasp of reactive state, lifecycle management, and modular composition, resulting in more maintainable code. By making this change, I'm not only rewriting my app but also advancing my proficiency and building a stronger foundation in Vue.js development.</p>
+<br/>
+
+- [ ] **6. Edit functionality:**
+<p>Adding the "Edit functionality" isn't just about enhancing my todo app; it's a deliberate choice to deepen my grasp of the basic concepts in Vue.js. By giving users the ability to edit their tasks, I'm not only making the app more user-friendly but also taking a deep dive into the core principles that underlie Vue.js development.</p>
+<br/>
+
+- [ ] **7. Accessibility (a11y) Enhancement:**
 <p>Prioritize accessibility (a11y) to ensure that the todo app is usable by everyone, regardless of their abilities. Implementing accessibility features not only adheres to best practices but also makes the app more inclusive and user-friendly.</p>
 
 ### 🌶️ Why These Features:
@@ -62,5 +70,9 @@ yarn lint
 * **TypeScript Support:** TypeScript enhances code quality and maintainability by adding static types, catching errors early, and providing better developer tooling.
 
 * **State Manager:** As the app evolves, managing state becomes crucial. A state manager simplifies state management, enhancing code organization and reducing bugs.
+
+* **Composition API:** The Composition API offers a more organized and reusable way to manage component logic, promoting better code structure and maintainability.
+
+* **Edit functionality:** Allowing users to edit tasks improves the user experience by providing the flexibility to update task details without starting from scratch.
 
 * **Accessibility Enhancement (a11y):** Prioritizing accessibility ensures that the todo app is usable by everyone, regardless of their abilities. By making the app accessible, you're promoting inclusivity, adhering to legal and ethical obligations, and improving the overall user experience for everyone, including those with disabilities. This commitment to accessibility aligns with the principles of universal design and responsible development.

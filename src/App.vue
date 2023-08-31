@@ -51,11 +51,25 @@ export default {
         { id: 4, title: "Pop up on delete", completed: true },
         { id: 5, title: "Add download", completed: true },
         { id: 6, title: "Add upload", completed: true },
-        { id: 7, title: "Add save to localstorage", completed: false },
+        { id: 7, title: "Add save to localstorage", completed: true },
         { id: 8, title: "Add state manager", completed: false },
-        { id: 9, title: "Add typescript", completed: false }
+        { id: 9, title: "Add typescript", completed: false },
+        { id: 10, title: "Add a11y", completed: false },
+        { id: 11, title: "Rewrite to composition api", completed: false },
+        { id: 12, title: "Add edit functionality", completed: false }
       ]
     };
+  },
+  created() {
+    this.todos = JSON.parse(localStorage.getItem("todos")) || this.todos;
+  },
+  watch: {
+    todos: {
+      handler() {
+        localStorage.setItem("todos", JSON.stringify(this.todos));
+      },
+      deep: true
+    }
   },
   methods: {
     addTodo(title) {
