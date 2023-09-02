@@ -1,0 +1,1 @@
+export { localStoragePlugin } from "./LocalStoragePlugin";

@@ -46,7 +46,7 @@ yarn lint
 <p>Incorporate TypeScript to the project for enhanced code maintainability and type safety. TypeScript provides static type checking, which helps catch errors during development and makes the codebase more robust. By adding TypeScript support, the app's codebase becomes more predictable and less prone to runtime errors, leading to better code quality.</p>
 <br/>
 
-- [ ] **4. State Manager:**
+- [x] ~~**4. State Manager:**~~
 <p>Integrate a state management solution, such as Vuex, to efficiently manage the app's global state. As the app grows in complexity, managing state across various components can become challenging. A state manager centralizes the data, making it easier to share and modify across different parts of the app. This improves code organization and reduces the risk of state-related bugs.</p>
 <br/>
 

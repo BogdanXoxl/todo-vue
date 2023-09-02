@@ -12,7 +12,7 @@
     <my-list
       class="todo"
       :items="todos.filter((todo) => !todo.completed)"
-      @removeItem="removeTodo"
+      @removeItem="onRemove"
       @completeItem="completeTodo"
       subtitle="Awesome, you complited all your todos!"
     />
@@ -20,7 +20,7 @@
       class="complited"
       title="Completed"
       :items="todos.filter((todo) => todo.completed)"
-      @removeItem="removeTodo"
+      @removeItem="onRemove"
     />
     <teleport to="#modal">
       <my-popup ref="popup" />
@@ -33,109 +33,45 @@ import MyHeader from "./components/MyHeader.vue";
 import MyList from "./components/MyList/MyList.vue";
 import ToastAlert from "./components/ToastAlert.vue";
 import { download, upload, parseArrayFromJson } from "./utils";
+import { TodoStore } from "./pinia";
 
 export default {
+  mixins: [TodoStore],
   components: {
     MyHeader,
     MyList,
     ToastAlert
   },
-  data() {
-    return {
-      counter: 0,
-      showError: false,
-      todos: [
-        { id: 1, title: "Add animation", completed: true },
-        { id: 2, title: "Fix styles when text too big", completed: true },
-        { id: 3, title: "Add toast alert", completed: true },
-        { id: 4, title: "Pop up on delete", completed: true },
-        { id: 5, title: "Add download", completed: true },
-        { id: 6, title: "Add upload", completed: true },
-        { id: 7, title: "Add save to localstorage", completed: true },
-        { id: 8, title: "Add state manager", completed: false },
-        { id: 9, title: "Add typescript", completed: false },
-        { id: 10, title: "Add a11y", completed: false },
-        { id: 11, title: "Rewrite to composition api", completed: false },
-        { id: 12, title: "Add edit functionality", completed: false }
-      ]
-    };
-  },
-  created() {
-    this.todos = JSON.parse(localStorage.getItem("todos")) || this.todos;
-  },
-  watch: {
-    todos: {
-      handler() {
-        localStorage.setItem("todos", JSON.stringify(this.todos));
-      },
-      deep: true
-    }
-  },
   methods: {
-    addTodo(title) {
-      if (title)
-        this.todos.unshift({
-          id: Date.now(),
-          title,
-          completed: false
+    async onRemove(id) {
+      const item = this.todos.find((todo) => todo.id === id);
+
+      if (item) {
+        const result = await this.$refs.popup.open({
+          title: "Do you really wanna delete this todo?",
+          text: item.title,
+          subtext: new Date(item.id).toLocaleString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric"
+          })
         });
-      else {
-        this.showError = true;
-        setTimeout(() => {
-          this.showError = false;
-        }, 3000);
+
+        if (result) {
+          this.todoStore.removeTodo(item.id);
+        }
       }
     },
-    async removeTodo(id) {
-      const itemIndex = this.todos.findIndex((todo) => todo.id === id);
-      if (itemIndex === -1) return;
-
-      const result = await this.$refs.popup.open({
-        title: "Do you really wanna delete this todo?",
-        text: this.todos[itemIndex].title,
-        subtext: new Date(this.todos[itemIndex].id).toLocaleString("en-US", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-          hour: "numeric",
-          minute: "numeric"
-        })
-      });
-
-      if (result) {
-        this.todos.splice(itemIndex, 1);
-      }
-    },
-    completeTodo(id) {
-      // this.todos = this.todos.map((todo) => {
-      //   if (todo.id === id) {
-      //     return {
-      //       ...todo,
-      //       completed: true
-      //     };
-      //   }
-      //   return todo;
-      // });
-
-      const newTodo = this.todos.find((todo) => todo.id === id);
-      newTodo.completed = true;
-
-      this.todos = this.todos.filter((todo) => todo.id !== id);
-      this.todos.push(newTodo);
-    },
-
     onDownload() {
       download("todos.json", JSON.stringify(this.todos));
     },
 
     async onUpload() {
       const fileTodos = await upload().then((txt) => parseArrayFromJson(txt));
-      this.todos = Array.from(
-        [...fileTodos, ...this.todos].reduce((m, o) => m.set(o.id, o), new Map()).values()
-      );
+      this.todoStore.mergeTodos(fileTodos);
     }
   }
 };
 </script>
-
-<style scoped></style>
