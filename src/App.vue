@@ -35,10 +35,10 @@ import ToastAlert from "./components/ToastAlert.vue";
 import { download, upload, parseArrayFromJson } from "./utils";
 import { TodoStore } from "./pinia";
 import type { MyPopup } from "./components/UI";
+// ERROR:: save localstorage DOES-NOT WORK
 // TODO:: remove all complited btn
-// TODO:: remove complited without clarification
 // TODO:: add scroll to top
-
+// TODO:: update readme + icons
 export default {
   mixins: [TodoStore],
   components: {
@@ -51,19 +51,23 @@ export default {
       const item = this.todos.find((todo) => todo.id === id);
 
       if (item) {
-        const result = await (this.$refs.popup as typeof MyPopup).open({
-          title: "Do you really wanna delete this todo?",
-          text: item.title,
-          subtext: new Date(item.id).toLocaleString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-            hour: "numeric",
-            minute: "numeric"
-          })
-        });
+        if (!item.completed) {
+          const result = await (this.$refs.popup as typeof MyPopup).open({
+            title: "Do you really wanna delete this todo?",
+            text: item.title,
+            subtext: new Date(item.id).toLocaleString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+              hour: "numeric",
+              minute: "numeric"
+            })
+          });
 
-        if (result) {
+          if (result) {
+            this.todoStore.removeTodo(item.id);
+          }
+        } else {
           this.todoStore.removeTodo(item.id);
         }
       }

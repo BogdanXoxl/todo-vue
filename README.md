@@ -6,7 +6,7 @@
 
 <p>I built a todo app using Vue.js and Tailwind CSS. This practical project helped me learn Vue.js fundamentals, including reactive data handling and component-based architecture. Tailwind CSS streamlined styling, allowing me to focus on functionality. The app offers users an organized way to manage tasks efficiently.</p>
 
-<p align="left"> <a href="https://developer.mozilla.org/en-US/docs/Glossary/HTML5" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/html5-colored.svg" width="36" height="36" alt="HTML5" /></a> <a href="https://www.w3.org/TR/CSS/#css" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/css3-colored.svg" width="36" height="36" alt="CSS3" /></a> <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/tailwindcss-colored.svg" width="36" height="36" alt="TailwindCSS" /></a> <a href="https://vuejs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original-wordmark.svg" alt="vuejs" width="36" height="36"/></a></p>
+<p align="left"> <a href="https://developer.mozilla.org/en-US/docs/Glossary/HTML5" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/html5-colored.svg" width="36" height="36" alt="HTML5" /></a> <a href="https://www.w3.org/TR/CSS/#css" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/css3-colored.svg" width="36" height="36" alt="CSS3" /></a> <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/tailwindcss-colored.svg" width="36" height="36" alt="TailwindCSS" /></a> <a href="https://vuejs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original-wordmark.svg" alt="vuejs" width="36" height="36"/></a> <a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/typescript-colored.svg" width="36" height="36" alt="TypeScript" /></a></p>
 
 ### 🔧 Project Setup
 
@@ -42,7 +42,7 @@ yarn lint
 <p>Integrate the ability to upload and download task lists as files. Users can export their tasks as a file and import them back into the app. This feature offers users a way to back up their tasks externally or transfer them between devices easily. It enhances the app's versatility and makes task management even more user-friendly.</p>
 <br/>
 
-- [x] **3. TypeScript Support:**
+- [x] ~~**3. TypeScript Support**~~
 <p>Incorporate TypeScript to the project for enhanced code maintainability and type safety. TypeScript provides static type checking, which helps catch errors during development and makes the codebase more robust. By adding TypeScript support, the app's codebase becomes more predictable and less prone to runtime errors, leading to better code quality.</p>
 <br/>
 
