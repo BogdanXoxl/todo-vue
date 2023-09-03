@@ -42,7 +42,7 @@ yarn lint
 <p>Integrate the ability to upload and download task lists as files. Users can export their tasks as a file and import them back into the app. This feature offers users a way to back up their tasks externally or transfer them between devices easily. It enhances the app's versatility and makes task management even more user-friendly.</p>
 <br/>
 
-- [ ] **3. TypeScript Support:**
+- [x] **3. TypeScript Support:**
 <p>Incorporate TypeScript to the project for enhanced code maintainability and type safety. TypeScript provides static type checking, which helps catch errors during development and makes the codebase more robust. By adding TypeScript support, the app's codebase becomes more predictable and less prone to runtime errors, leading to better code quality.</p>
 <br/>
 

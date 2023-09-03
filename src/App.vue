@@ -28,12 +28,16 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import MyHeader from "./components/MyHeader.vue";
 import MyList from "./components/MyList/MyList.vue";
 import ToastAlert from "./components/ToastAlert.vue";
 import { download, upload, parseArrayFromJson } from "./utils";
 import { TodoStore } from "./pinia";
+import type { MyPopup } from "./components/UI";
+// TODO:: remove all complited btn
+// TODO:: remove complited without clarification
+// TODO:: add scroll to top
 
 export default {
   mixins: [TodoStore],
@@ -43,11 +47,11 @@ export default {
     ToastAlert
   },
   methods: {
-    async onRemove(id) {
+    async onRemove(id: number) {
       const item = this.todos.find((todo) => todo.id === id);
 
       if (item) {
-        const result = await this.$refs.popup.open({
+        const result = await (this.$refs.popup as typeof MyPopup).open({
           title: "Do you really wanna delete this todo?",
           text: item.title,
           subtext: new Date(item.id).toLocaleString("en-US", {
@@ -69,7 +73,7 @@ export default {
     },
 
     async onUpload() {
-      const fileTodos = await upload().then((txt) => parseArrayFromJson(txt));
+      const fileTodos = await upload().then((txt: string) => parseArrayFromJson(txt));
       this.todoStore.mergeTodos(fileTodos);
     }
   }

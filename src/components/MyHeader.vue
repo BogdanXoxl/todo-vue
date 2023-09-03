@@ -27,9 +27,12 @@
   </header>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
   name: "MyHeader",
+  emits: ["add", "upload", "download"],
   data() {
     return {
       inputValue: ""
@@ -48,5 +51,5 @@ export default {
       this.inputValue = "";
     }
   }
-};
+});
 </script>

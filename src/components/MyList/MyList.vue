@@ -1,6 +1,6 @@
 <template>
   <transition name="mylist" mode="out-in" appear>
-    <div v-if="items.length">
+    <div v-if="items?.length">
       <h2 v-if="title" class="text-2xl mt-5 mb-3 pb-3 border-primary border-b">{{ title }}</h2>
       <transition-group tag="ul" name="list" class="flex flex-col gap-2">
         <my-list-item
@@ -20,22 +20,34 @@
   </transition>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
+import type { PropType } from "vue";
+
 import MyListItem from "./MyListItem.vue";
 
-export default {
+type ListItem = {
+  id: number;
+  title: string;
+  completed: boolean;
+};
+
+export default defineComponent({
   name: "MyList",
-  emits: ["removeItem", "completeItem"],
+  emits: {
+    completeItem: (id: number) => id,
+    removeItem: (id: number) => id
+  },
   components: {
     MyListItem
   },
   props: {
     fallback: String,
-    items: Array,
+    items: Array as PropType<Array<ListItem>>,
     title: String,
     subtitle: String
   }
-};
+});
 </script>
 
 <style scoped>

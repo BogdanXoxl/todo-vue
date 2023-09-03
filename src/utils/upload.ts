@@ -1,7 +1,9 @@
 export async function upload() {
   const element = document.createElement("input");
-  let resolve, reject;
-  const result = new Promise((res, rej) => {
+  let resolve: (value: string | PromiseLike<string>) => void;
+  let reject: (reason: unknown) => void;
+
+  const result = new Promise<string>((res, rej) => {
     [resolve, reject] = [res, rej];
   });
 
@@ -9,14 +11,22 @@ export async function upload() {
   element.setAttribute("accept", ".json");
   element.style.display = "none";
   document.body.appendChild(element);
+
   element.click();
   element.addEventListener("change", async (e) => {
     try {
-      resolve(await e.target.files[0].text());
+      const input = e.target as HTMLInputElement;
+
+      if (!input.files?.length) {
+        return;
+      }
+
+      resolve(await input.files[0].text());
     } catch (e) {
       reject(e);
     }
   });
+
   document.body.removeChild(element);
 
   return result;

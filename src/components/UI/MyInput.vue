@@ -2,7 +2,7 @@
   <input
     type="text"
     :value="modelValue"
-    @input="$emit('update:modelValue', $event.target.value)"
+    @input="handleInputChange"
     :class="[
       'w-full border-2 border-solid  rounded-md outline-0 px-2 ',
       (error && 'border-danger shake') || 'border-primary focus:border-secondary'
@@ -10,14 +10,19 @@
   />
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: "MyInput",
+  emits: ["update:modelValue"],
   props: {
     modelValue: String,
     error: Boolean
   },
-  emits: ["update:modelValue"]
+  methods: {
+    handleInputChange(event: Event) {
+      this.$emit("update:modelValue", (event.target as HTMLInputElement).value);
+    }
+  }
 };
 </script>
 

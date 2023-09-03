@@ -18,7 +18,7 @@
   </Transition>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: "MyPopup",
   popUpController: null,
@@ -32,14 +32,14 @@ export default {
   },
 
   methods: {
-    open({ title, text, subtext }) {
+    open({ title, text, subtext }: { title: string; text: string; subtext: string }) {
       this.title = title;
       this.text = text;
       this.subtext = subtext;
 
       let resolve, reject;
 
-      const promise = new Promise((res, rej) => {
+      const promise = new Promise<boolean>((res, rej) => {
         resolve = res;
         reject = rej;
       });

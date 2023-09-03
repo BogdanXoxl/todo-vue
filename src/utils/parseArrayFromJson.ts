@@ -1,6 +1,6 @@
 const props = ["id", "title", "completed"];
 
-export function parseArrayFromJson(text) {
+export function parseArrayFromJson(text: string) {
   const textObj = JSON.parse(text);
 
   if (
