@@ -50,7 +50,7 @@ yarn lint
 <p>Integrate a state management solution, such as Vuex, to efficiently manage the app's global state. As the app grows in complexity, managing state across various components can become challenging. A state manager centralizes the data, making it easier to share and modify across different parts of the app. This improves code organization and reduces the risk of state-related bugs.</p>
 <br/>
 
-- [ ] **5. Composition API:**
+- [x] **5. Composition API:**
 <p>Transitioning my existing options-style todo app to the Composition API isn't just an upgrade—it's a deliberate step to deepen my Vue.js understanding. Embracing the Composition API means rethinking how I structure code, moving from options to composition functions for more intuitive logic organization. This transition sharpens my grasp of reactive state, lifecycle management, and modular composition, resulting in more maintainable code. By making this change, I'm not only rewriting my app but also advancing my proficiency and building a stronger foundation in Vue.js development.</p>
 <br/>
 

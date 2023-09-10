@@ -4,18 +4,16 @@
       <slot></slot>
     </div>
     <div class="flex gap-2">
-      <my-button v-if="!completed" @click.stop="$emit('compelteItem')" primary>&#10003;</my-button>
-      <my-button @click.stop="$emit('removeItem')">&minus;</my-button>
+      <MyButton v-if="!completed" @click.stop="emit('completeItem')" primary>&#10003;</MyButton>
+      <MyButton @click.stop="$emit('removeItem')">&minus;</MyButton>
     </div>
   </li>
 </template>
 
-<script lang="ts">
-export default {
-  name: "MyListItem",
-  emits: ["removeItem", "compelteItem"],
-  props: {
-    completed: Boolean
-  }
-};
+<script setup lang="ts">
+defineProps({
+  completed: Boolean
+});
+
+const emit = defineEmits(["removeItem", "completeItem"]);
 </script>

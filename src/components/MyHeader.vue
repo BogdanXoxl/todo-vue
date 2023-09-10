@@ -3,53 +3,47 @@
     <div class="flex justify-between">
       <h1 class="text-4xl">{{ title }}</h1>
       <div class="flex">
-        <my-button
+        <MyButton
           type="file"
           title="Upload"
-          @click="$emit('upload')"
+          @click="emit('upload')"
           class="rounded-l-md rounded-r-none border border-primary"
         >
-          <icon-upload class="w-6 h-6" />
-        </my-button>
-        <my-button
+          <IconUpload class="w-6 h-6" />
+        </MyButton>
+        <MyButton
           title="Download"
-          @click="$emit('download')"
+          @click="emit('download')"
           class="rounded-r-md rounded-l-none border-r border-y border-primary"
         >
-          <icon-download class="w-6 h-6" />
-        </my-button>
+          <IconDownload class="w-6 h-6" />
+        </MyButton>
       </div>
     </div>
     <div class="flex justify-between gap-3">
-      <my-input v-model.trim="inputValue" @keyup.enter="add" autofocus :error="error" />
-      <my-button primary @click="add">Add +</my-button>
+      <MyInput v-model.trim="inputValue" @keyup.enter="add" autofocus :error="error" />
+      <MyButton primary @click="add">Add +</MyButton>
     </div>
   </header>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { ref } from "vue";
 
-export default defineComponent({
-  name: "MyHeader",
-  emits: ["add", "upload", "download"],
-  data() {
-    return {
-      inputValue: ""
-    };
+defineProps({
+  title: {
+    type: String,
+    required: true
   },
-  props: {
-    title: {
-      type: String,
-      required: true
-    },
-    error: Boolean
-  },
-  methods: {
-    add() {
-      this.$emit("add", this.inputValue);
-      this.inputValue = "";
-    }
-  }
+  error: Boolean
 });
+
+const emit = defineEmits(["add", "upload", "download"]);
+
+const inputValue = ref("");
+
+const add = () => {
+  emit("add", inputValue.value);
+  inputValue.value = "";
+};
 </script>

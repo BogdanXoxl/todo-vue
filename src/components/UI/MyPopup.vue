@@ -10,57 +10,54 @@
         <p v-if="text" class="w-full text-justify">{{ text }}</p>
         <span v-if="subtext" class="text-sm text-primary">{{ subtext }}</span>
         <div class="flex gap-3">
-          <my-button danger full @click="confirm">Ok</my-button>
-          <my-button full @click="close">Cancel</my-button>
+          <MyButton danger full @click="confirm">Ok</MyButton>
+          <MyButton full @click="close">Cancel</MyButton>
         </div>
       </div>
     </div>
   </Transition>
 </template>
 
-<script lang="ts">
-export default {
-  name: "MyPopup",
-  popUpController: null,
-  data() {
-    return {
-      isOpen: false,
-      title: "",
-      text: "",
-      subtext: ""
-    };
-  },
+<script setup lang="ts">
+import { ref } from "vue";
 
-  methods: {
-    open({ title, text, subtext }: { title: string; text: string; subtext: string }) {
-      this.title = title;
-      this.text = text;
-      this.subtext = subtext;
+defineOptions({ name: "MyPopup" });
 
-      let resolve, reject;
+let popUpController: {
+  reject: (v: string) => void;
+  resolve: (value: boolean | PromiseLike<boolean>) => void;
+} | null = null;
 
-      const promise = new Promise<boolean>((res, rej) => {
-        resolve = res;
-        reject = rej;
-      });
+let isOpen = ref(false);
+let title = "";
+let text = "";
+let subtext = "";
 
-      this.$options.popUpController = { reject, resolve };
-      this.isOpen = true;
+const open = (data: { title: string; text: string; subtext: string }) => {
+  title = data.title;
+  text = data.text;
+  subtext = data.subtext;
 
-      return promise;
-    },
+  const promise = new Promise<boolean>((resolve, reject) => {
+    popUpController = { reject, resolve };
+  });
 
-    close() {
-      this.isOpen = false;
-      this.$options.popUpController.resolve(false);
-    },
+  isOpen.value = true;
 
-    confirm() {
-      this.$options.popUpController.resolve(true);
-      this.close();
-    }
-  }
+  return promise;
 };
+
+const close = () => {
+  isOpen.value = false;
+  popUpController?.resolve(false);
+};
+
+const confirm = () => {
+  popUpController?.resolve(true);
+  close();
+};
+
+defineExpose({ open });
 </script>
 
 <style scoped>

@@ -1,8 +1,7 @@
 <template>
   <input
     type="text"
-    :value="modelValue"
-    @input="handleInputChange"
+    v-model="modelValue"
     :class="[
       'w-full border-2 border-solid  rounded-md outline-0 px-2 ',
       (error && 'border-danger shake') || 'border-primary focus:border-secondary'
@@ -10,20 +9,15 @@
   />
 </template>
 
-<script lang="ts">
-export default {
-  name: "MyInput",
-  emits: ["update:modelValue"],
-  props: {
-    modelValue: String,
-    error: Boolean
-  },
-  methods: {
-    handleInputChange(event: Event) {
-      this.$emit("update:modelValue", (event.target as HTMLInputElement).value);
-    }
-  }
-};
+<script setup lang="ts">
+defineOptions({
+  name: "MyInput"
+});
+defineProps({
+  error: Boolean
+});
+
+const modelValue = defineModel<string>();
 </script>
 
 <style scoped>

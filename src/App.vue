@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-lg mx-auto px-3 pt-7 text-secondary bg-primary-white">
-    <my-header
+    <MyHeader
       title="Todo App"
       class="mb-5"
       :error="showError"
@@ -8,78 +8,82 @@
       @download="onDownload"
       @upload="onUpload"
     />
-    <toast-alert title="Todo cannot be empty!" :showError="showError" />
-    <my-list
+    <ToastAlert title="Todo cannot be empty!" :showError="showError" />
+    <MyList
       class="todo"
       :items="todos.filter((todo) => !todo.completed)"
       @removeItem="onRemove"
       @completeItem="completeTodo"
       subtitle="Awesome, you complited all your todos!"
     />
-    <my-list
+    <MyList
       class="complited"
       title="Completed"
       :items="todos.filter((todo) => todo.completed)"
       @removeItem="onRemove"
     />
     <teleport to="#modal">
-      <my-popup ref="popup" />
+      <MyPopup ref="popup" />
     </teleport>
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
+import { ref } from "vue";
+import { storeToRefs } from "pinia";
+
 import MyHeader from "./components/MyHeader.vue";
 import MyList from "./components/MyList/MyList.vue";
 import ToastAlert from "./components/ToastAlert.vue";
+
 import { download, upload, parseArrayFromJson } from "./utils";
-import { TodoStore } from "./pinia";
+import { useTodoStore } from "./pinia";
+
 import type { MyPopup } from "./components/UI";
-// ERROR:: save localstorage DOES-NOT WORK
+// ERROR:: save localstorage DOES-NOT WORK AT PROD
 // TODO:: remove all complited btn
+// TODO:: add "show more" button
 // TODO:: add scroll to top
 // TODO:: update readme + icons
-export default {
-  mixins: [TodoStore],
-  components: {
-    MyHeader,
-    MyList,
-    ToastAlert
-  },
-  methods: {
-    async onRemove(id: number) {
-      const item = this.todos.find((todo) => todo.id === id);
 
-      if (item) {
-        if (!item.completed) {
-          const result = await (this.$refs.popup as typeof MyPopup).open({
-            title: "Do you really wanna delete this todo?",
-            text: item.title,
-            subtext: new Date(item.id).toLocaleString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-              hour: "numeric",
-              minute: "numeric"
-            })
-          });
+const popup = ref<typeof MyPopup>();
 
-          if (result) {
-            this.todoStore.removeTodo(item.id);
-          }
-        } else {
-          this.todoStore.removeTodo(item.id);
-        }
+const todoStore = useTodoStore();
+const { showError, todos } = storeToRefs(todoStore);
+const { addTodo, removeTodo, mergeTodos, completeTodo } = todoStore;
+
+const onRemove = async (id: number) => {
+  const item = todos.value.find((todo) => todo.id === id);
+
+  if (item) {
+    if (!item.completed) {
+      const result = await popup.value?.open({
+        title: "Do you really wanna delete this todo?",
+        text: item.title,
+        subtext: new Date(item.id).toLocaleString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "numeric",
+          minute: "numeric"
+        })
+      });
+
+      if (result) {
+        removeTodo(item.id);
       }
-    },
-    onDownload() {
-      download("todos.json", JSON.stringify(this.todos));
-    },
-
-    async onUpload() {
-      const fileTodos = await upload().then((txt: string) => parseArrayFromJson(txt));
-      this.todoStore.mergeTodos(fileTodos);
+    } else {
+      removeTodo(item.id);
     }
   }
+};
+
+const onDownload = () => {
+  download("todos.json", JSON.stringify(todos.value));
+};
+
+const onUpload = async () => {
+  const fileTodos = await upload().then((txt: string) => parseArrayFromJson(txt));
+  mergeTodos(fileTodos);
 };
 </script>

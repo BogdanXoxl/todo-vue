@@ -3,15 +3,15 @@
     <div v-if="items?.length">
       <h2 v-if="title" class="text-2xl mt-5 mb-3 pb-3 border-primary border-b">{{ title }}</h2>
       <transition-group tag="ul" name="list" class="flex flex-col gap-2">
-        <my-list-item
+        <MyListItem
           v-for="item in items"
           :key="item.id"
           :completed="item.completed"
-          @removeItem="$emit('removeItem', item.id)"
-          @compelteItem="$emit('completeItem', item.id)"
+          @removeItem="emit('removeItem', item.id)"
+          @completeItem="emit('completeItem', item.id)"
         >
           {{ item.title }}
-        </my-list-item>
+        </MyListItem>
       </transition-group>
     </div>
     <h2 v-else-if="subtitle" class="text-center">
@@ -20,10 +20,8 @@
   </transition>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import type { PropType } from "vue";
-
 import MyListItem from "./MyListItem.vue";
 
 type ListItem = {
@@ -32,21 +30,16 @@ type ListItem = {
   completed: boolean;
 };
 
-export default defineComponent({
-  name: "MyList",
-  emits: {
-    completeItem: (id: number) => id,
-    removeItem: (id: number) => id
-  },
-  components: {
-    MyListItem
-  },
-  props: {
-    fallback: String,
-    items: Array as PropType<Array<ListItem>>,
-    title: String,
-    subtitle: String
-  }
+defineProps({
+  fallback: String,
+  items: Array as PropType<Array<ListItem>>,
+  title: String,
+  subtitle: String
+});
+
+const emit = defineEmits({
+  completeItem: (id: number) => id,
+  removeItem: (id: number) => id
 });
 </script>
 

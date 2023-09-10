@@ -1,6 +1,6 @@
 import { createPinia } from "pinia";
 import { localStoragePlugin } from "./plugins";
-export { TodoStore, useTodoStore } from "./stores";
+export { useTodoStore } from "./stores";
 
 export const pinia = createPinia();
 

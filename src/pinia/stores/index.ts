@@ -1,1 +1,1 @@
-export { default as TodoStore, useTodoStore } from "./todo";
+export { useTodoStore } from "./todo";

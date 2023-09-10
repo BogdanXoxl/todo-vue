@@ -11,22 +11,13 @@
   </button>
 </template>
 
-<script lang="ts">
-export default {
-  name: "MyButton",
-  props: {
-    primary: {
-      type: Boolean,
-      default: false
-    },
-    danger: {
-      type: Boolean,
-      default: false
-    },
-    full: {
-      type: Boolean,
-      default: false
-    }
-  }
-};
+<script setup lang="ts">
+defineOptions({
+  name: "MyButton"
+});
+defineProps({
+  primary: Boolean,
+  danger: Boolean,
+  full: Boolean
+});
 </script>

@@ -2,7 +2,7 @@
   <transition name="toast">
     <div v-if="showError" class="relative">
       <div
-        class="w-full absolute rounded-md bg-danger/90 text-primary-white py-2 px-4 border-danger border-2"
+        class="w-full absolute rounded-md bg-danger/90 text-primary-white py-2 px-4 border-danger border-2 z-50"
       >
         <span>{{ title }}</span>
       </div>
@@ -10,14 +10,11 @@
   </transition>
 </template>
 
-<script lang="ts">
-export default {
-  name: "ToastAlert",
-  props: {
-    title: String,
-    showError: Boolean
-  }
-};
+<script setup lang="ts">
+defineProps({
+  title: String,
+  showError: Boolean
+});
 </script>
 
 <style scoped>
