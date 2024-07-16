@@ -10,16 +10,12 @@ declare module "pinia" {
 }
 
 export function localStoragePlugin(ctx: PiniaPluginContext) {
-  console.log(ctx);
   if (ctx.options.persist) {
     ctx.store.$subscribe((e) => {
-      console.log("SUBSCRIBE");
-      if (e.events) {
-        localStorage.setItem(e.storeId, JSON.stringify(ctx.store));
-        console.log("SET ITEMS");
-      }
+      localStorage.setItem(e.storeId, JSON.stringify(ctx.store.$state));
     });
-    return JSON.parse(localStorage.getItem(ctx.store.$id) || "{}") || ctx.store;
+
+    return { ...ctx.store.$state, ...JSON.parse(localStorage.getItem(ctx.store.$id) || "{}") };
   }
 }
 
