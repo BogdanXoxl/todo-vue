@@ -1,10 +1,10 @@
-# [ToDo App](https://todo-vue-bogdanxoxl.vercel.app/) with Vue.js 3.0
+# [ToDo App](https://todo-vue-bogdanxoxls-projects.vercel.app/) with Vue.js 3.0
 
 <img src="https://github.com/BogdanXoxl/todo-vue/blob/main/public/vue-todo.gif">
 
 ### 🔥 About
 
-<p>I built a todo app using Vue.js and Tailwind CSS. This practical project helped me learn Vue.js fundamentals, including reactive data handling and component-based architecture. Tailwind CSS streamlined styling, allowing me to focus on functionality. The app offers users an organized way to manage tasks efficiently.</p>
+<p>I developed a todo app with Vue.js and Tailwind CSS, enhancing my skills in reactive data handling and component-based architecture. I used Pinia for state management and created a custom Pinia plugin for storage persistence. I also implemented upload/download functionality and transitioned the project from JavaScript with the Options API to TypeScript with the Composition API. This project solidified my expertise in modern web development practices and offered a fresh perspective on development with Vue, having previously focused solely on React for my projects.</p>
 
 <p align="left"> <a href="https://developer.mozilla.org/en-US/docs/Glossary/HTML5" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/html5-colored.svg" width="36" height="36" alt="HTML5" /></a> <a href="https://www.w3.org/TR/CSS/#css" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/css3-colored.svg" width="36" height="36" alt="CSS3" /></a> <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/tailwindcss-colored.svg" width="36" height="36" alt="TailwindCSS" /></a> <a href="https://vuejs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original-wordmark.svg" alt="vuejs" width="36" height="36"/></a> <a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/typescript-colored.svg" width="36" height="36" alt="TypeScript" /></a></p>
 

@@ -22,7 +22,7 @@ export const useTodoStore = defineStore("todo", {
       { id: 4, title: "Pop up on delete", completed: true },
       { id: 5, title: "Add download", completed: true },
       { id: 6, title: "Add upload", completed: true },
-      { id: 7, title: "Add save to localstorage", completed: false },
+      { id: 7, title: "Add save to localstorage", completed: true },
       { id: 8, title: "Add state manager", completed: true },
       { id: 9, title: "Add typescript", completed: true },
       { id: 10, title: "Add a11y", completed: false },
