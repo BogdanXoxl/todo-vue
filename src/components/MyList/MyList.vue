@@ -6,15 +6,15 @@
         <MyListItem
           v-for="item in items"
           :key="item.id"
-          :completed="item.completed"
-          @removeItem="emit('removeItem', item.id)"
-          @completeItem="emit('completeItem', item.id)"
+          :item="item"
+          @onRemoveItem="emit('onRemoveItem', item.id)"
+          @onUpdateItem="(item: ListItem) => emit('onUpdateItem', item)"
         >
           {{ item.title }}
         </MyListItem>
       </transition-group>
     </div>
-    <h2 v-else-if="subtitle" class="text-center">
+    <h2 v-else-if="subtitle" class="text-center h-[58px]">
       {{ subtitle }}
     </h2>
   </transition>
@@ -22,13 +22,8 @@
 
 <script setup lang="ts">
 import type { PropType } from "vue";
-import MyListItem from "./MyListItem.vue";
-
-type ListItem = {
-  id: number;
-  title: string;
-  completed: boolean;
-};
+import type { ListItem } from "./MyListItem";
+import { MyListItem } from "./MyListItem";
 
 defineProps({
   fallback: String,
@@ -38,8 +33,8 @@ defineProps({
 });
 
 const emit = defineEmits({
-  completeItem: (id: number) => id,
-  removeItem: (id: number) => id
+  onRemoveItem: (id: number) => id,
+  onUpdateItem: (item: ListItem) => item
 });
 </script>
 

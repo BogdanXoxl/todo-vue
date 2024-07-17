@@ -27,7 +27,7 @@ export const useTodoStore = defineStore("todo", {
       { id: 9, title: "Add typescript", completed: true },
       { id: 10, title: "Add a11y", completed: false },
       { id: 11, title: "Rewrite to composition api", completed: true },
-      { id: 12, title: "Add edit functionality", completed: false }
+      { id: 12, title: "Add edit functionality", completed: true }
     ]
   }),
 
@@ -39,11 +39,16 @@ export const useTodoStore = defineStore("todo", {
           title,
           completed: false
         });
-      else {
+      else if (!this.showError) {
         this.showError = true;
-        setTimeout(() => {
-          this.showError = false;
-        }, 3000);
+      }
+    },
+
+    updateTodo(todo: Todo) {
+      const updatedTodo = this.todos.find((t) => t.id === todo.id);
+
+      if (updatedTodo) {
+        Object.assign(updatedTodo, todo);
       }
     },
 
@@ -55,17 +60,6 @@ export const useTodoStore = defineStore("todo", {
 
     async removeTodo(id: number) {
       this.todos = this.todos.filter((todo) => todo.id !== id);
-    },
-
-    completeTodo(id: number) {
-      const newTodo = this.todos.find((todo) => todo.id === id);
-
-      if (newTodo) {
-        newTodo.completed = true;
-
-        this.todos = this.todos.filter((todo) => todo.id !== id);
-        this.todos.push(newTodo);
-      }
     }
   }
 });

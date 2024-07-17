@@ -5,22 +5,23 @@
       class="mb-5"
       :error="showError"
       @add="addTodo"
-      @download="onDownload"
-      @upload="onUpload"
+      @download="handleDownload"
+      @upload="handleUpload"
     />
-    <ToastAlert title="Todo cannot be empty!" :showError="showError" />
+    <ToastAlert title="Todo cannot be empty!" v-model="showError" />
     <MyList
       class="todo"
       :items="todos.filter((todo) => !todo.completed)"
-      @removeItem="onRemove"
-      @completeItem="completeTodo"
+      @onRemoveItem="handleRemove"
+      @onUpdateItem="handleUpdate"
       subtitle="Awesome, you complited all your todos!"
     />
     <MyList
       class="complited"
       title="Completed"
       :items="todos.filter((todo) => todo.completed)"
-      @removeItem="onRemove"
+      @onRemoveItem="handleRemove"
+      @onUpdateItem="handleUpdate"
     />
     <teleport to="#modal">
       <MyPopup ref="popup" />
@@ -40,19 +41,15 @@ import { download, upload, parseArrayFromJson } from "./utils";
 import { useTodoStore } from "./pinia";
 
 import type { MyPopup } from "./components/UI";
-// ERROR:: save localstorage DOES-NOT WORK AT PROD
-// TODO:: remove all complited btn
-// TODO:: add "show more" button
-// TODO:: add scroll to top
-// TODO:: update readme + icons
+import type { Todo } from "./pinia/stores/todo";
 
 const popup = ref<typeof MyPopup>();
 
 const todoStore = useTodoStore();
 const { showError, todos } = storeToRefs(todoStore);
-const { addTodo, removeTodo, mergeTodos, completeTodo } = todoStore;
+const { addTodo, removeTodo, mergeTodos, updateTodo } = todoStore;
 
-const onRemove = async (id: number) => {
+const handleRemove = async (id: number) => {
   const item = todos.value.find((todo) => todo.id === id);
 
   if (item) {
@@ -78,12 +75,16 @@ const onRemove = async (id: number) => {
   }
 };
 
-const onDownload = () => {
+const handleDownload = () => {
   download("todos.json", JSON.stringify(todos.value));
 };
 
-const onUpload = async () => {
+const handleUpload = async () => {
   const fileTodos = await upload().then((txt: string) => parseArrayFromJson(txt));
   mergeTodos(fileTodos);
+};
+
+const handleUpdate = (todo: Todo) => {
+  updateTodo(todo);
 };
 </script>

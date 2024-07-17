@@ -1,5 +1,3 @@
-// simple realization
-
 import type { PiniaPluginContext } from "pinia";
 
 declare module "pinia" {

@@ -11,9 +11,20 @@
 </template>
 
 <script setup lang="ts">
+import { watch } from "vue";
+
 defineProps({
-  title: String,
-  showError: Boolean
+  title: String
+});
+
+const showError = defineModel({ required: true });
+showError.value = false;
+
+watch(showError, () => {
+  if (showError.value)
+    setTimeout(() => {
+      showError.value = false;
+    }, 3000);
 });
 </script>
 
