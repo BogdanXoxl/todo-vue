@@ -1,6 +1,6 @@
 # [ToDo App](https://todo-vue-bogdanxoxls-projects.vercel.app/) with Vue.js 3.0
 
-<img src="https://github.com/BogdanXoxl/todo-vue/blob/main/public/vue-todo-800.gif">
+<a href="https://todo-vue-bogdanxoxls-projects.vercel.app/" target="_blank" rel="noreferrer"><img src="https://github.com/BogdanXoxl/todo-vue/blob/main/public/vue-todo-800.gif"></a>
 
 ### 🔥 About
 
@@ -54,7 +54,7 @@ yarn lint
 <p>Transitioning my existing options-style todo app to the Composition API isn't just an upgrade—it's a deliberate step to deepen my Vue.js understanding. Embracing the Composition API means rethinking how I structure code, moving from options to composition functions for more intuitive logic organization. This transition sharpens my grasp of reactive state, lifecycle management, and modular composition, resulting in more maintainable code. By making this change, I'm not only rewriting my app but also advancing my proficiency and building a stronger foundation in Vue.js development.</p>
 <br/>
 
-- [ ] **6. Edit functionality:**
+- [x] ~~**6. Edit functionality:**~~
 <p>Adding the "Edit functionality" isn't just about enhancing my todo app; it's a deliberate choice to deepen my grasp of the basic concepts in Vue.js. By giving users the ability to edit their tasks, I'm not only making the app more user-friendly but also taking a deep dive into the core principles that underlie Vue.js development.</p>
 <br/>
 
