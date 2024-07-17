@@ -1,6 +1,6 @@
 # [ToDo App](https://todo-vue-bogdanxoxls-projects.vercel.app/) with Vue.js 3.0
 
-<img src="https://github.com/BogdanXoxl/todo-vue/blob/main/public/vue-todo.gif">
+<img src="https://github.com/BogdanXoxl/todo-vue/blob/main/public/vue-todo-800.gif">
 
 ### 🔥 About
 
